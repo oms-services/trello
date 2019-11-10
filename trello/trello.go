@@ -6,7 +6,7 @@ import (
 	"fmt"
 	trello "github.com/adlio/trello"
 	"github.com/cloudevents/sdk-go"
-	result "github.com/heaptracetechnology/microservice-trello/result"
+	result "github.com/oms-services/trello/result"
 	"log"
 	"net/http"
 	"net/url"

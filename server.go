@@ -1,7 +1,7 @@
 package main
 
 import (
-	route "github.com/heaptracetechnology/microservice-trello/route"
+	route "github.com/oms-services/trello/route"
 	"log"
 	"net/http"
 )

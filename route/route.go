@@ -2,7 +2,7 @@ package route
 
 import (
     "github.com/gorilla/mux"
-    trello "github.com/heaptracetechnology/microservice-trello/trello"
+    trello "github.com/oms-services/trello/trello"
     "net/http"
 )
 
