@@ -512,17 +512,17 @@ func getMessageUpdates(listID string, sub Subscribe, existing bool) {
 	}
 
 	if existing && !isExistingPrinted {
-		resp, err := c.Send(context.Background(), event)
+		resp, evt, err := c.Send(context.Background(), event)
 		if err != nil {
-			log.Printf("failed to send: %v", err)
+			log.Printf("failed to send: %v (%v)", err, evt)
 		}
 		fmt.Printf("Response1: \n%s\n", resp)
 		finalCards = nil
 		isExistingPrinted = true
 	} else if oldCard != nil && finalCard.ID != oldCard.ID {
-		resp, err := c.Send(context.Background(), event)
+		resp, evt, err := c.Send(context.Background(), event)
 		if err != nil {
-			log.Printf("failed to send: %v", err)
+			log.Printf("failed to send: %v (%v)", err, evt)
 		}
 		fmt.Printf("Response2: \n%s\n", resp)
 		oldCard = finalCard
