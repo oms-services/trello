@@ -1,7 +1,7 @@
 omg: 1
 lifecycle:
   startup:
-    command: ["microservice-trello"]
+    command: ['microservice-trello']
 info:
   version: 1.0.0
   title: Trello
@@ -111,7 +111,7 @@ actions:
         required: true
         help: The board ID of trello account.
     output:
-      type: list
+      type: object
       contentType: application/json
       properties:
         id:
@@ -139,12 +139,12 @@ actions:
       description:
         type: string
         in: requestBody
-        help: The description for the card. 
+        help: The description for the card.
       listId:
         type: string
         in: requestBody
         required: true
-        help: The ID of list where card has to add. 
+        help: The ID of list where card has to add.
     output:
       type: object
       contentType: application/json
@@ -172,7 +172,7 @@ actions:
         required: true
         help: The board ID of trello account.
     output:
-      type: list
+      type: object
       contentType: application/json
       properties:
         id:
@@ -289,8 +289,10 @@ actions:
             type: boolean
             in: requestBody
             required: true
-            help: Set true to get all existing cards or false to get only new card added to board after subscription.
-        http: 
+            help:
+              Set true to get all existing cards or false to get only new card
+              added to board after subscription.
+        http:
           port: 3000
           subscribe:
             method: post
@@ -361,7 +363,7 @@ actions:
         required: true
         help: The username of trello account.
     output:
-      type: list
+      type: object
       contentType: application/json
       properties:
         id:
@@ -376,9 +378,9 @@ actions:
         url:
           help: Returns URL of the trello board.
           type: string
-        prefs:
-          help: The preference of the trello board.
-          type: object
+        #prefs:
+        #  help: The preference of the trello board.
+        #  type: object
 environment:
   API_KEY:
     type: string
