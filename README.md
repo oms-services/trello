@@ -1,117 +1,269 @@
-# _Trello_ OMG Microservice
+# _Trello_ Open Microservice
 
-[![Open Microservice Guide](https://img.shields.io/badge/OMG%20Enabled-👍-green.svg?)](https://microservice.guide)
-[![Build Status](https://travis-ci.com/omg-services/trello.svg?branch=master)](https://travis-ci.com/omg-services/trello)
-[![codecov](https://codecov.io/gh/omg-services/trello/branch/master/graph/badge.svg)](https://codecov.io/gh/omg-services/trello)
+> This is an trello service
 
-Trello microservice allows to create board, list, cards and also to subscribe the entire board or list, it has a variety of work and personal uses and overview of what is being worked on and what is the current status of card.
+[![Open Microservice Specification Version](https://img.shields.io/badge/Open%20Microservice-1.0-477bf3.svg)](https://openmicroservices.org) [![Open Microservices Spectrum Chat](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/open-microservices) [![Open Microservices Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md) [![Open Microservices Commitzen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Usage in [Storyscript](https://storyscript.io/)
+## Introduction
 
-##### Create Board
-```coffee
->>> trello createBoard boardName:'boardName'
-{"success":"true/false","message":"success/failure message","statusCode":"HTTPstatusCode"}
+This project is an example implementation of the [Open Microservice Specification](https://openmicroservices.org), a standard originally created at [Storyscript](https://storyscript.io) for building highly-portable "microservices" that expose the events, actions, and APIs inside containerized software.
+
+## Getting Started
+
+The `oms` command-line interface allows you to interact with Open Microservices. If you're interested in creating an Open Microservice the CLI also helps validate, test, and debug your `oms.yml` implementation!
+
+See the [oms-cli](https://github.com/microservices/oms) project to learn more!
+
+### Installation
+
 ```
-##### Get Board
-```coffee
->>> trello getBoard boardId:'boardId'
-{"id":"boardId","name":"boardName","desc":"description","closed":"true/false"}
-```
-##### Create list on board
-```coffee
->>> trello createList boardId:'boardId' listName:'listName'
-{"id": "listID","name": "listName","idBoard": "idBoard","closed": "true/false"}
-```
-##### Get List
-```coffee
->>> trello getLists boardId:'boardId'
-{"id":"listID","name":"listName","idBoard":"idBoard","closed":"true/false"}
-```
-##### Add card to list
-```coffee
->>> trello addCard name:'name' description:'description' listId:'listId'
-{"success":"true/false","message":"success/failure message","statusCode":"HTTPstatusCode"}
-```
-##### Get cards
-```coffee
->>> trello getCards boardId:'boardId'
-{"id":"cardID","name":"cardName","shortUrl":"shortUrl","url":"url","idBoard":"idBoard","idList":"idList"}          
-```
-##### Move card to list
-```coffee
->>> trello moveCard cardId:'cardId' listId:'listId'
-{"success":"true/false","message":"success/failure message","statusCode":"HTTPstatusCode"}
-```
-##### Copy card to list
-```coffee
->>> trello copyCard cardId:'cardId' listId:'listId'
-{"id":"cardID","name":"cardName","shortUrl":"shortUrl","url":"url","idBoard":"idBoard","idList":"idList"}
-```
-##### Delete Board
-```coffee
->>> trello deleteBoard boardId:'boardId'
-{"success":"true/false","message":"success/failure message","statusCode":"HTTPstatusCode"}
-```
-##### Get All Boards
-```coffee
->>> trello getAllBoards username:'username'
-{"id":"boardId","name":"boardName","desc":"description","closed":"true/false","url":"boardLink"}
+npm install -g @microservices/oms
 ```
 
-Curious to [learn more](https://docs.storyscript.io/)?
+## Usage
 
-✨🍰✨
+### Open Microservices CLI Usage
 
-## Usage with [OMG CLI](https://www.npmjs.com/package/omg)
-##### Create Board
+Once you have the [oms-cli](https://github.com/microservices/oms) installed, you can run any of the following commands from within this project's root directory:
+
+#### Actions
+
+##### createBoard
+
+> Create new board in trello.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                         |
+| :------------ | :------- | :------- | :------ | :---------------------------------- |
+| boardName     | `string` | `true`   | None    | The name for new board.             |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.      |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account. |
+
 ```shell
-$ omg run createBoard -a boardName=<BOARD_NAME> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Get Board
-```shell
-$ omg run getBoard -a boardId=<BOARD_ID> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Create list on board
-```shell
-$ omg run createList -a boardId=<BOARD_ID> -a listName=<LIST_NAME> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Get List
-```shell
-$ omg run getLists -a boardId=<BOARD_ID> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Add card to list
-```shell
-$ omg run addCard -a name=<CARD_NAME> -a description=<DESCRIPTION> -a listId=<LIST_ID> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Get cards
-```shell
-$ omg run getCards -a boardId=<BOARD_ID> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Move card to list
-```shell
-$ omg run moveCard -a cardId=<CARD_ID> -a listId=<LIST_ID> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Copy card to list
-```shell
-$ omg run copyCard -a cardId=<CARD_ID> -a listId=<LIST_ID> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Delete Board
-```shell
-$ omg run deleteBoard -a boardId=<BOARD_ID> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Subscribe card
-```shell
-$ omg subscribe receive card -a boardId=<BOARD_ID> -a listId=<LIST_ID> -a existing=<BOOLEAN> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Boards For User
-```shell
-$ omg run boardForUser -a username=<USERNAME> -e API_KEY=<API_KEY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
+oms run createBoard \
+    -a boardName='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
 ```
 
+##### getBoard
 
-**Note**: the OMG CLI requires [Docker](https://docs.docker.com/install/) to be installed.
+> Get board details from trello.
 
-## License
-[MIT License](https://github.com/HeaptraceTechnologyCollection/microservice-trello/blob/master/LICENSE).
+##### Action Arguments
 
+| Argument Name | Type     | Required | Default | Description                         |
+| :------------ | :------- | :------- | :------ | :---------------------------------- |
+| boardId       | `string` | `true`   | None    | The board ID of trello account.     |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.      |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account. |
+
+```shell
+oms run getBoard \
+    -a boardId='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### createList
+
+> Create new list in trello.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                           |
+| :------------ | :------- | :------- | :------ | :------------------------------------ |
+| boardId       | `string` | `true`   | None    | The board ID to where to create list. |
+| listName      | `string` | `true`   | None    | The name for new list.                |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.        |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account.   |
+
+```shell
+oms run createList \
+    -a boardId='*****' \
+    -a listName='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### getLists
+
+> Get all list details from trello board.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                         |
+| :------------ | :------- | :------- | :------ | :---------------------------------- |
+| boardId       | `string` | `true`   | None    | The board ID of trello account.     |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.      |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account. |
+
+```shell
+oms run getLists \
+    -a boardId='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### addCard
+
+> Create new card on list.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                           |
+| :------------ | :------- | :------- | :------ | :------------------------------------ |
+| name          | `string` | `true`   | None    | The name of card to be added.         |
+| description   | `string` | `false`  | None    | The description for the card.         |
+| listId        | `string` | `true`   | None    | The ID of list where card has to add. |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.        |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account.   |
+
+```shell
+oms run addCard \
+    -a name='*****' \
+    -a description='*****' \
+    -a listId='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### getCards
+
+> Get all card details from all lists.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                         |
+| :------------ | :------- | :------- | :------ | :---------------------------------- |
+| boardId       | `string` | `true`   | None    | The board ID of trello account.     |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.      |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account. |
+
+```shell
+oms run getCards \
+    -a boardId='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### moveCard
+
+> Move card from one list to another.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                            |
+| :------------ | :------- | :------- | :------ | :------------------------------------- |
+| cardId        | `string` | `true`   | None    | The ID of card to move.                |
+| listId        | `string` | `true`   | None    | The ID of list where to move the card. |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.         |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account.    |
+
+```shell
+oms run moveCard \
+    -a cardId='*****' \
+    -a listId='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### copyCard
+
+> Copy card from one list to another.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                            |
+| :------------ | :------- | :------- | :------ | :------------------------------------- |
+| cardId        | `string` | `true`   | None    | The ID of card to copy.                |
+| listId        | `string` | `true`   | None    | The ID of list where to copy the card. |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.         |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account.    |
+
+```shell
+oms run copyCard \
+    -a cardId='*****' \
+    -a listId='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### card
+
+> Triggered anytime when any new card is added in list.
+
+##### Action Arguments
+
+| Argument Name | Type      | Required | Default | Description                                                                                         |
+| :------------ | :-------- | :------- | :------ | :-------------------------------------------------------------------------------------------------- |
+| boardId       | `string`  | `true`   | None    | The board ID to subscribe.                                                                          |
+| listId        | `string`  | `false`  | None    | The list ID to subscribe the list.                                                                  |
+| existing      | `boolean` | `true`   | None    | Set true to get all existing cards or false to get only new card added to board after subscription. |
+| API_KEY       | `string`  | `true`   | None    | The API key of trello account.                                                                      |
+| ACCESS_TOKEN  | `string`  | `true`   | None    | The access token of trello account.                                                                 |
+
+```shell
+oms subscribe card \
+    -a boardId='*****' \
+    -a listId='*****' \
+    -a existing='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### deleteBoard
+
+> Delete board from trello.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                         |
+| :------------ | :------- | :------- | :------ | :---------------------------------- |
+| boardId       | `string` | `true`   | None    | The board ID to delete.             |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.      |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account. |
+
+```shell
+oms run deleteBoard \
+    -a boardId='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### getAllBoards
+
+> Get board details from trello.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                         |
+| :------------ | :------- | :------- | :------ | :---------------------------------- |
+| username      | `string` | `true`   | None    | The username of trello account.     |
+| API_KEY       | `string` | `true`   | None    | The API key of trello account.      |
+| ACCESS_TOKEN  | `string` | `true`   | None    | The access token of trello account. |
+
+```shell
+oms run getAllBoards \
+    -a username='*****' \
+    -e API_KEY=$API_KEY \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+## Contributing
+
+All suggestions in how to improve the specification and this guide are very welcome. Feel free share your thoughts in the Issue tracker, or even better, fork the repository to implement your own ideas and submit a pull request.
+
+[![Edit trello on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/oms-services/trello)
+
+This project is guided by [Contributor Covenant](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md). Please read out full [Contribution Guidelines](https://github.com/oms-services/.github/blob/master/CONTRIBUTING.md).
+
+## Additional Resources
+
+- [Install the CLI](https://github.com/microservices/oms) - The OMS CLI helps developers create, test, validate, and build microservices.
+- [Example OMS Services](https://github.com/oms-services) - Examples of OMS-compliant services written in a variety of languages.
+- [Example Language Implementations](https://github.com/microservices) - Find tooling & language implementations in Node, Python, Scala, Java, Clojure.
+- [Storyscript Hub](https://hub.storyscript.io) - A public registry of OMS services.
+- [Community Chat](https://spectrum.chat/open-microservices) - Have ideas? Questions? Join us on Spectrum.
