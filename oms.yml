@@ -2,7 +2,7 @@ oms: 1
 info:
   version: 1.0.0
   title: Trello
-  description: This is an trello service
+  description: Open Microservice wrapper for Trello
   contact:
     name: Open Microservices
     url: 'https://openmicroservices.org'
