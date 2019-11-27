@@ -13,7 +13,7 @@ info:
 lifecycle:
   startup:
     command:
-      - microservice-trello
+      - trello
 actions:
   createBoard:
     help: Create new board in trello.
@@ -291,8 +291,7 @@ actions:
             in: requestBody
             required: true
             help: >-
-              Set true to get all existing cards or false to get only new card
-              added to board after subscription.
+              Set true to get all existing cards or false to get only new card added to board after subscription.
         http:
           port: 3000
           subscribe:
